@@ -42,7 +42,44 @@ lapply(FUN = function(file){
   mutate(year = as.integer(year)) -> 
   gcam_hector_gmst
 
-listQueries(prjdata)
+
+
+# For the target files 
+list.files("ci-results", pattern = "GCAM_SSP1_2p6|GCAM_SSP4_2p6|GCAM_SSP4_2p6", full.names = TRUE)  %>% 
+  lapply(FUN = function(file){
+    
+    print(file)
+    scn <- gsub(pattern = "exe_|-gcam-hector-outputstream.csv", replacement = "", x = basename(file))
+    lines <- readLines(file)
+    index <- max(which(lines == "################ Hector Core Reset ################"))
+    read.csv(file, skip = index, col.names = c("year", "scenario", "spinup", "componet", "variable", "value", "unit")) %>% 
+      filter(spinup == 0 & variable %in% c(GLOBAL_TAS(), LAND_TAS(), SST())) %>% 
+      mutate(scenario = scn) %>%  
+      select(year, scenario, value, variable)  %>% 
+      group_by(year, scenario, variable) %>% 
+      summarise(value = mean(value)) %>% 
+      tidyr::spread(variable, value) %>% 
+      ungroup -> 
+      df
+    
+    flnd  <- 0.29
+    
+    df %>% 
+      mutate(gmst = (land_tas * flnd + sst * (1 - flnd))) %>%  
+      select(year, scenario, gmst) -> 
+      out 
+    
+    return(out)
+    
+    
+  }) %>% 
+  do.call(what = "rbind", args = .) %>% 
+  mutate(year = as.integer(year)) -> 
+  gcam_hector_gmst_target
+  
+
+
+gcam_hector_gmst <- rbind(gcam_hector_gmst, gcam_hector_gmst_target)
 
 
 # the results are in MTC
@@ -77,6 +114,10 @@ split(total_annual_co2, total_annual_co2$scenario) %>%
 cumsum_co2 %>% 
   inner_join(gcam_hector_gmst) -> 
   out 
+
+out %>% 
+  ggplot(aes(co2_MTC, gmst, color = scenario)) + 
+  geom_line()
 
 write.csv(out, file = "gcam-hector_co2_gmst.csv", row.names = FALSE)
 
