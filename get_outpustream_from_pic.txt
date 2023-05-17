@@ -1,0 +1,29 @@
+# Calls used to download all the hector output stream files from the a gcam ci run on pic
+
+
+scp ./exe_GCAM/logs/gcam-hector-outputstream.csv NNNN:~/Desktop/exe_GCAM-gcam-hector-outputstream.csv
+
+scp ./exe_GCAM_2p6/logs/gcam-hector-outputstream.csv NNNN:~/Desktop/exe_GCAM_2p6-gcam-hector-outputstream.csv
+
+scp ./exe_GCAM_SSP1/logs/gcam-hector-outputstream.csv NNNN:~/Desktop/exe_GCAM_SSP1-gcam-hector-outputstream.csv
+
+scp ./exe_GCAM_SSP1_2p6/logs/gcam-hector-outputstream.csv NNNN:~/Desktop/exe_GCAM_SSP1_2p6-gcam-hector-outputstream.csv
+
+scp ./exe_GCAM_SSP2/logs/gcam-hector-outputstream.csv NNNN:~/Desktop/exe_GCAM_SSP2-gcam-hector-outputstream.csv
+
+scp ./exe_GCAM_SSP2_2p6/logs/gcam-hector-outputstream.csv NNNN:~/Desktop/exe_GCAM_SSP2_2p6-gcam-hector-outputstream.csv
+
+scp ./exe_GCAM_SSP3/logs/gcam-hector-outputstream.csv NNNN:~/Desktop/exe_GCAM_SSP3-gcam-hector-outputstream.csv
+
+scp ./exe_GCAM_SSP4/logs/gcam-hector-outputstream.csv NNNN:~/Desktop/exe_GCAM_SSP4-gcam-hector-outputstream.csv
+
+scp ./exe_GCAM_SSP5/logs/gcam-hector-outputstream.csv NNNN:~/Desktop/exe_GCAM_SSP5-gcam-hector-outputstream.csv
+
+scp ./exe_GCAM_SSP5_2p6/logs/gcam-hector-outputstream.csv NNNN:~/Desktop/exe_GCAM_SSP5_2p6-gcam-hector-outputstream.csv
+
+scp ./exe_GCAM-USA_Ref/logs/gcam-hector-outputstream.csv NNNN:~/Desktop/exe_GCAM-USA_Ref-gcam-hector-outputstream.csv
+
+scp ./exe_GCAM-USA_Tax25/logs/gcam-hector-outputstream.csv NNNN:~/Desktop/exe_GCAM-USA_Tax25-gcam-hector-outputstream.csv
+
+
+
